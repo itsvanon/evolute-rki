@@ -11,6 +11,8 @@ function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [loginStatus, setLoginStatus] = useState('');
+
     Axios.defaults.withCredentials = true;
 
     const handleSubmit = async (e) => {
@@ -20,16 +22,20 @@ function LoginPage() {
             password: password,
         }).then((response) => {
             if (response.data.message) {
-                
+                setLoginStatus(response.data.message);
+            } else {
+                setLoginStatus(response.data[0].fname);
             }
         });
     };
 
     useEffect(() => {
         Axios.get("http://localhost:3001/login").then((response) => {
-            console.log(response);
-        })
-    }, [])
+            if(response.data.loggedIn === true) {
+                setLoginStatus(response.data.user.fname);
+            }
+        });
+    }, []);
 
     return (
         <div className="form">
@@ -49,6 +55,7 @@ function LoginPage() {
                     Login
                 </Button>
             </Form>
+            <h1>Logged in as: {loginStatus}</h1>
         </div>
     )
 }

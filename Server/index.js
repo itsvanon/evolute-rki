@@ -1,11 +1,10 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-
 const mysql = require("mysql2");
-const e = require("express");
+
+const app = express();
 
 app.use(express.json());
 app.use(cors({
@@ -19,15 +18,17 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-app.use(session({
-    key: "userId",
-    secret: "evolute",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 60 * 60,
-    }
-}))
+app.use(
+    session({
+        key: 'userId',
+        secret: "evolute",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 60 * 60 * 24,
+        },
+    })
+);
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -43,14 +44,15 @@ app.get("/login", (req, res) => {
     } else {
         res.send({ loggedIn: false })
     }
-})
+});
 
 app.post('/login', (req, res) => {
+    
     const username = req.body.username;
     const password = req.body.password;
 
     db.query(
-        "SELECT username, password FROM user WHERE username = ? AND password = ?",
+        "SELECT * FROM user WHERE username = ? AND password = ?;",
         [username, password],
         (err, result) => {
             if(err) {
@@ -63,11 +65,7 @@ app.post('/login', (req, res) => {
                 res.send(result);
             }
             else {
-                res.send(
-                    {
-                        message: "Wrong Username/Password"
-                    }
-                );
+                res.send({ message: "Wrong Username/Password"});
             }
         }
     );
