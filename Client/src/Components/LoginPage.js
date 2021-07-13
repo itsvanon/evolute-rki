@@ -2,7 +2,8 @@ import React from 'react';
 import logo from '../evolutelogo.png';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
 import './LoginPage.css'; 
 
 function LoginPage() {
@@ -10,11 +11,25 @@ function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    Axios.defaults.withCredentials = true;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(username);
-        console.log(password);
-    }
+        Axios.post('http://localhost:3001/login', {
+            username: username, 
+            password: password,
+        }).then((response) => {
+            if (response.data.message) {
+                
+            }
+        });
+    };
+
+    useEffect(() => {
+        Axios.get("http://localhost:3001/login").then((response) => {
+            console.log(response);
+        })
+    }, [])
 
     return (
         <div className="form">
