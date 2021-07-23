@@ -1,0 +1,7 @@
+.navbarbrand {
+    position: relative;
+    background: url(../../evolutelogo.png);
+    width: 170px;
+    height: 28px;
+    background-size: contain;
+}
