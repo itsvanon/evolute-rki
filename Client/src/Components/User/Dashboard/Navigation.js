@@ -25,10 +25,13 @@ function Navigation() {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
                             <Nav.Link>
-                                <Link to="/User/KeyRequest">Key Request</Link>
+                                <Link to="/User/KeyRequest" style={{textDecoration: "none"}}>Key Request</Link>
                             </Nav.Link>
                             <Nav.Link>
-                                <Link to="/User/KeyDownload">Key Download</Link>
+                                <Link to="/User/KeyDownload" style={{textDecoration: "none"}}>Key Download</Link>
+                            </Nav.Link>
+                            <Nav.Link>
+                                <Link to="/User/Requests" style={{textDecoration: "none"}}>Requests</Link>
                             </Nav.Link>
                             <Button variant="secondary" size="sm" active onClick={handleLogout}>
                                 Logout

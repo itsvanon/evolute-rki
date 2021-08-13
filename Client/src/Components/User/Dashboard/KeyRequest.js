@@ -1,13 +1,35 @@
 import React, {useState} from 'react'
-import {DropdownButton, Dropdown} from 'react-bootstrap'
+import {DropdownButton, Dropdown, Form, Button, Tabs, Tab} from 'react-bootstrap'
 
 function KeyRequest() {
 
+    var localStorArr = [];
+    var time = new Date();
+
     const [dropdownValue, setDropdownValue] = useState('');
+    const [key, setKey] = useState('');
+    const [tabKey, setTabKey] = useState('')
+
     const handleSelect = (e) => {
         setDropdownValue(e);
     }
-    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        var timestamp = time.getHours()+":"+time.getMinutes()+":"+time.getSeconds();
+
+        var reqParas = {
+            "key": key,
+            "username": "vanon28",
+            "keyType": dropdownValue,
+            "timestamp": timestamp
+        };
+        console.log(reqParas); 
+        localStorArr.push(JSON.stringify(reqParas));
+        localStorage.setItem("keyReqs", localStorArr);
+        localStorArr.push(localStorage.getItem("keyReqs"));
+    }
     return (
         <div>
             <DropdownButton
@@ -17,6 +39,13 @@ function KeyRequest() {
                 title="Select Key"
                 className="mt-2"
                 onSelect={handleSelect}
+                style={
+                    {
+                        position: "fixed",
+                        top: "22%",
+                        left: "10%"
+                    }
+                }
             >
                 <Dropdown.Item eventKey="dukpt">DUKPT</Dropdown.Item>
                 <Dropdown.Item eventKey="mskey">Master - Session Key</Dropdown.Item>
@@ -25,33 +54,119 @@ function KeyRequest() {
             </DropdownButton>
             {dropdownValue === "dukpt" && (
                 <> 
-                    <br />
-                    <br />
-                    <h3>Dukpt Form</h3>
+                    <Form style={
+                        {
+                            position: "fixed", 
+                            top: "35%",
+                            left: "40%",
+                            borderStyle: "solid",
+                            borderColor: "white",
+                            padding: "5%", 
+                            borderRadius: "8px",
+                            backgroundColor: "#302727"
+                        }
+                    } onSubmit={handleSubmit}>
+                        <Form.Label style={{color: "white"}}>DUKPT Key</Form.Label>
+                        <br /><br />
+                        <Tabs
+                            id="controlled-tab"
+                            activeKey={tabKey}
+                            onSelect={(k) => setTabKey(k)}
+                            className="mb-3"
+                        >
+                        <Tab eventKey="ipekip" title="IPEK">
+                            <Form.Group className="mb-3" controlId="dukptForm">
+                                <Form.Control type="text" placeholder="Enter" value={key} onChange={e => setKey(e.target.value)} /><br />
+                                <Button variant="secondary" type="submit">
+                                    Request
+                                </Button>
+                            </Form.Group>
+                        </Tab>
+                        <Tab eventKey="compip" title="Component">
+                            <Form.Group className="mb-3" controlId="dukptForm">
+                                <Form.Control type="text" placeholder="Enter" value={key} onChange={e => setKey(e.target.value)} /><br />
+                                <Button variant="secondary" type="submit">
+                                    Request
+                                </Button>
+                            </Form.Group>
+                        </Tab>
+                        </Tabs>
+                    </Form>
                 </>
             ) 
             }
             {dropdownValue === "mskey" && (
                 <>
-                    <br />
-                    <br />
-                    <h3>Master Session Key</h3>
+                    <Form style={
+                        {
+                            position: "fixed", 
+                            top: "35%",
+                            left: "40%",
+                            borderStyle: "solid",
+                            borderColor: "white",
+                            padding: "5%", 
+                            borderRadius: "8px",
+                            backgroundColor: "#302727"
+                        }
+                    } onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="dukptForm">
+                            <Form.Label style={{color: "white"}}>Master Session Key</Form.Label>
+                            <Form.Control type="text" placeholder="Enter" value={key} onChange={e => setKey(e.target.value)} />
+                        </Form.Group>
+                        <Button variant="secondary" type="submit">
+                            Request
+                        </Button>
+                    </Form>
                 </>
             ) 
             }
             {dropdownValue === "aes" && (
                 <>
-                    <br />
-                    <br />
-                    <h3>AES</h3>
+                    <Form style={
+                        {
+                            position: "fixed", 
+                            top: "35%",
+                            left: "40%",
+                            borderStyle: "solid",
+                            borderColor: "white",
+                            padding: "5%", 
+                            borderRadius: "8px",
+                            backgroundColor: "#302727"
+                        }
+                    } onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="dukptForm">
+                            <Form.Label style={{color: "white"}}>AES Key</Form.Label>
+                            <Form.Control type="text" placeholder="Enter" value={key} onChange={e => setKey(e.target.value)} />
+                        </Form.Group>
+                        <Button variant="secondary" type="submit">
+                            Request
+                        </Button>
+                    </Form>
                 </>
             ) 
             }
             {dropdownValue === "rsakeys" && (
                 <>
-                    <br />
-                    <br />
-                    <h3>RSA Keys</h3>
+                    <Form style={
+                        {
+                            position: "fixed", 
+                            top: "35%",
+                            left: "40%",
+                            borderStyle: "solid",
+                            borderColor: "white",
+                            padding: "5%", 
+                            borderRadius: "8px",
+                            backgroundColor: "#302727"
+                        }
+                    } onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="dukptForm">
+                            <Form.Label style={{color: "white"}}>RSA Key</Form.Label>
+                            <Form.Control type="text" placeholder="Enter" value={key} onChange={e => setKey(e.target.value)} />
+                        </Form.Group>
+                        <Button variant="secondary" type="submit">
+                            Request
+                        </Button>
+                    </Form>
                 </>
             ) 
             }

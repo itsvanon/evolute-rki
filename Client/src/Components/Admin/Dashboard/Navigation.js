@@ -25,6 +25,9 @@ function Navigation() {
                             <Nav.Link>
                                 <Link to="/Admin/Signup">Register</Link>
                             </Nav.Link>
+                            <Nav.Link>
+                                <Link to="/Admin/Requests">Requests</Link>
+                            </Nav.Link>
                             <Button variant="secondary" size="sm" active onClick={handleLogout}>
                                 Logout
                             </Button>

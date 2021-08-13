@@ -9,8 +9,14 @@ function KeyDownload() {
 
     return (
         <div>
-            <h1>Key Download</h1>
-            <Button variant="secondary" size="lg" active onClick={handleClick}>
+            <h1 style={{position: "fixed", top: "32.5%", left: "40%", textDecoration:"underline", textDecorationColor:"white"}}>Key Download</h1>
+            <Button variant="secondary" size="lg" active onClick={handleClick} style={
+                {
+                    position: "fixed", 
+                    top: "45%", 
+                    left: "45%"
+                }
+            }>
                 Download
             </Button>
         </div>
