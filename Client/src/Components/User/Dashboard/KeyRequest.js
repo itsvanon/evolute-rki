@@ -17,6 +17,8 @@ function KeyRequest() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        var currStor = localStorage.getItem("keyReqs");
+
         var timestamp = time.getHours()+":"+time.getMinutes()+":"+time.getSeconds();
 
         var reqParas = {
@@ -25,7 +27,8 @@ function KeyRequest() {
             "keyType": dropdownValue,
             "timestamp": timestamp
         };
-        console.log(reqParas); 
+
+        localStorArr.push(currStor);
         localStorArr.push(JSON.stringify(reqParas));
         localStorage.setItem("keyReqs", localStorArr);
         localStorArr.push(localStorage.getItem("keyReqs"));

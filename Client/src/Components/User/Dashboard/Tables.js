@@ -10,25 +10,28 @@ function Tables() {
         }, [])
     
     console.log(tableData.length);
+    console.log(tableData);
 
     return (
         <div>
-            <Table striped bordered hover variant="dark" style={{position: "fixed", top: "25%", left: "25%", marginLeft: "auto", marginRight: "auto", width: "50%"}}>
-            <thead>
-                <tr>
-                <th>Request Type</th>
-                <th>Request Status</th>
-                <th>Timestamp</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{tableData.keyType}</td>
-                    <td>Active</td>
-                    <td>{tableData.timestamp}</td>
-                </tr>
-            </tbody>
-            </Table>
+            {/* {tableData.map((rows) => (
+                <Table striped bordered hover variant="dark" style={{position: "fixed", top: "25%", left: "25%", marginLeft: "auto", marginRight: "auto", width: "50%"}}>
+                <thead>
+                    <tr>
+                    <th>Request Type</th>
+                    <th>Request Status</th>
+                    <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{rows.keyType}</td>
+                        <td>Active</td>
+                        <td>{rows.timestamp}</td>
+                    </tr>
+                </tbody>
+                </Table>
+            ))} */}
         </div>
     )
 }
